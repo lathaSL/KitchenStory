@@ -1,0 +1,29 @@
+
+<div class="container-fluid m1-auto">
+  <form ngNoForm  [formGroup]="userForm" (ngSubmit)="login()">
+
+  <div class="mb-3 float-left">
+  <label for="name" class="col-sm-2 col-form-label">UserName</label>
+  <div class="col-sm-4">
+    <input type="text"  id="name"  formControlName="name" class="form-control">
+  </div>
+  <div class="alert alert-light" *ngIf="frm['name'].invalid && frm['name'].touched">
+    <p> Name is required!</p>
+ </div>
+
+</div>
+<div class="mb-3">
+  <label for="password" class="col-sm-2 col-form-label">Password</label>
+  <div class="col-sm-4">
+    <input type="password"  id="password" formControlName="password" class="form-control">
+  </div>
+  <div class="alert alert-light" *ngIf="frm['password'].invalid && frm['password'].touched">
+    <p> Password is required!</p>
+ </div>
+ 
+</div>
+<div class="mb-3">
+  <button type="submit" class="col-sm-1 btn btn-primary mb-3">Login</button>
+</div>
+</form>
+</div>

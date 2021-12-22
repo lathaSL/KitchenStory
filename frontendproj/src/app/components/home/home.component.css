@@ -1,0 +1,7 @@
+.carousel, .carousel-item {
+    height: 400px;
+    width:850px;
+} 
+body {
+    background-color: rgb(250, 226, 226);
+  }

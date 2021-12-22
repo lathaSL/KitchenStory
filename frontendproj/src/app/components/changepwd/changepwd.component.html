@@ -1,0 +1,65 @@
+<div ng-controller='myController' >
+  <br/>
+  <br/>
+      <div class="text-center">
+        <strong>Change Password:</strong>
+        <br/>
+        <br/>
+      </div><!-- <button type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="showChangePwd()">Change Password</button> -->
+    <div  class="float-left container chg col col-sm-5" >
+      
+
+        <form ngNoForm  [formGroup]="chgPwdForm" (ngSubmit)="changePassword()">
+          <div class="row">
+            <div class="col col-sm-5 col-form-label">
+              <label for="password" class="col col-form-label">Current Password</label>
+           </div>
+            <div class="col col-sm-5 col-form-label">
+              <input type="password"  id="password" formControlName="password" class="form-control">
+            </div> 
+          </div>
+          <div class="row alert alert-error" *ngIf="frm['password'].invalid && frm['password'].touched">
+             Password is required!
+         </div>
+          <div class="row">
+            <div class="col col-sm-5 col-form-label">
+              <label for="newpassword1" class="col col-form-label">New Password</label>
+            </div>
+            <div class="col col-sm-5">
+              <input type="password"  id="newpassword1" formControlName="newpassword1" class="form-control">
+            </div>
+            
+          </div>
+          <div class="row alert alert-error" *ngIf="frm['newpassword1'].invalid && frm['newpassword1'].touched">
+            Password is required!
+         </div>
+         
+          <div class="row">
+            <div class="col col-sm-5 col-form-label">
+              <label for="newpassword2" class="col-form-label">Retype new Password</label>
+            </div>
+            <div class="col col-sm-5">
+              <input type="password"  id="newpassword2" formControlName="newpassword2" class="form-control">
+            </div>
+           
+          </div>
+          <div class="row alert alert-error" *ngIf="frm['newpassword2'].invalid && frm['newpassword2'].touched">
+            Password is required!
+         </div>
+         <div class="row alert alert-error" *ngIf="frm['newpassword2']!= frm['newpassword1'] && frm['newpassword2'].touched">
+          New Passwords should be matched!
+       </div>
+          <div class="row">
+            <div class="col col-sm-5">  
+               <button type="submit" class="   btn btn-primary ">Change Password</button>
+            </div>
+            <div class="col col-sm-5">
+              <button type="Reset" class="btn btn-primary">Reset</button>
+            </div>
+            <br/><br/>
+            
+          </div>
+          </form>
+    </div>
+</div>
+

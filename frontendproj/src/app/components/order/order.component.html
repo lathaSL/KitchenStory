@@ -1,0 +1,50 @@
+
+<div [class.show]="false" *ngIf="showConfirm" class="container">
+   <br/><br/>
+    Please pay an amount of Rs. {{totalcost }}. Proceed with payment process.
+    <div><button (click)="confirmpg()">
+        Make Payment
+    </button>
+  </div>
+</div>
+<div [class.show]="false" *ngIf="showorderconfirm">
+    Payment received. Thank you for the Order.  Order will be delivered soon. 
+    Your order details:
+
+</div>
+<div class="col ml-auto text-right" [class.show]="false" *ngIf="showOrdDtl">
+    <form  [formGroup]="orderForm" (ngSubmit)= "callPayment()">
+      
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr  *ngFor="let item of selectedItems; let i = index" > 
+                <th scope="row"> 
+                 
+                {{i+1}}
+                </th>
+                <td>{{item.name}}</td>
+                <td valign="right">{{item.price }}</td>
+                </tr>
+                
+              <tr> 
+                <th scope="row"> 
+                 
+                </th>
+                <td><strong>Total:</strong></td>
+                <td valign="right"><strong>{{totalcost }} Rs.</strong></td>
+                </tr>
+        </table>
+        <button type="submit" class="btn btn-primary align-center"  *ngIf="showOrdDtl">
+            Confirm
+            </button>  
+  </form>
+</div>
+ 

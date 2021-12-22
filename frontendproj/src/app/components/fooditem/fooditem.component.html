@@ -1,0 +1,77 @@
+<div class='container' >
+  <div [class.show]="false" *ngIf="user" >
+    <h3>Search Food Items</h3>
+    <form [formGroup]="searchForm" >
+        <div class="form-group col-sm-4">
+            <label for="name">Enter food name:  </label>
+            <input type="text" formControlName="name" class="form-control"  (input)="onSearchChange($event)"><br/><br/>
+            
+        </div>
+    </form>   
+    </div>
+<div>
+  
+</div>
+    <div class="col ml-auto text-right" [class.show]="false" *ngIf="(!user && displayList) || user " >
+      <form  [formGroup]="listForm" (ngSubmit)= "callBuyOrAddFoodItem()">
+        <button type="submit" class="btn btn-primary" >
+        {{user? 'Buy' :'Add Food Item'}} 
+        </button>   
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col" style="text-align:right; padding-right: 5em;">Price</th>
+                  <th scope="col">Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr  *ngFor="let category of myGroup.controls['myCategory'].controls; let i = index" > 
+                  <th scope="row"> 
+                    <input type="checkbox" [formControl]="category">
+                  {{i+1}}
+                  </th>
+                  <td>{{FoodItems[i].name}}</td>
+                  <td style="text-align:right; padding-right: 5em;">{{FoodItems[i].price }}</td>
+                  <td>{{FoodItems[i].category }}</td>
+                  <td>
+                    <td> <button type="button" class="btn btn-sm btn-outline-primary mr-2"
+                        (click)="onDeleteFoodItem(FoodItems[i]._id)" *ngIf="!user"
+                        >Delete</button></td>
+                </tr>
+          </table>
+    </form>
+    <!-- <pre>
+
+      {{listForm.value | json}}
+    </pre> -->
+</div>
+      <div [class.show]="false" *ngIf="addmode && !user" >
+        <strong>Add New Item:</strong>
+<br/><br/>
+        <form [formGroup]="addForm" (ngSubmit)="submit()">
+          <div class="form-group col-sm-4">
+              <label for="name">Enter food name:  </label>
+              <input type="text" formControlName="name" class="form-control"><br/>
+              <div class="alert alert-light" *ngIf="addfrm['name'].invalid && addfrm['name'].touched">
+                 <p> Name is required!</p>
+              </div>
+              <label for="name">Enter Category:  </label>
+              <input type="text" formControlName="category" class="form-control"><br/>
+              <div class="alert alert-light" *ngIf="addfrm['category'].invalid && addfrm['category'].touched">
+                 <p> Category is required!</p>
+              </div>
+              <label for="name">Enter Price:  </label>
+              <input type="text" formControlName="price" class="form-control"  pattern="[0-9. ]*"><br/>
+              <div class="alert alert-error" *ngIf="addfrm['price'].invalid && addfrm['price'].touched">
+                 <p> Price should be digits!</p>
+              </div>
+              
+              <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+      </form>   
+      </div>
+
